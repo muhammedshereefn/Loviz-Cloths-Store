@@ -1,0 +1,486 @@
+﻿<%- include('userHeader') %>
+<div>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<div style="position: fixed; bottom: 20px; right: 20px; background-color: #4e7f5e; color: #fff; border-radius: 12px; padding: 10px; display: flex; align-items: center; justify-content: space-around; width: 120px; height: 60px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); z-index: 1000;">
+    <a href="https://wa.me/918848530816" target="_blank" style="text-decoration: none; color: #fff;">
+        <i class="fab fa-whatsapp" style="font-size: 24px;"></i>
+    </a>
+    <a href="https://www.instagram.com/loviz_cloths/" target="_blank" style="text-decoration: none; color: #fff;">
+        <i class="fab fa-instagram" style="font-size: 24px;"></i>
+    </a>
+</div>
+
+<section style="position: relative; width: 100%; height: 500px; overflow: hidden;">
+    <!-- Bootstrap Container -->
+    <div class="container" style="height: 100%;">
+        <!-- Top Row for Typing Effect -->
+        <div class="row" style="height: 20%; display: flex; align-items: center; justify-content: center;">
+            <h1 class="amatic-sc-regular" id="dynamicText" style="font-size: 3rem; color: #555; line-height: 1.6; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); text-align: center;">
+                <!-- Dynamic typing text will appear here -->
+            </h1>
+        </div>
+
+        <!-- Bottom Row for Infinite Scroll Image -->
+        <div class="row" style="height: 50%; display: flex; align-items: center; justify-content: center;">
+            <div class="scrolling-img">
+                <div class="scrolling-img-wrapper">
+                    <img src="/Images/xyz.png" alt="Shop Banner">
+                    <img src="/Images/xyz.png" alt="Shop Banner"> 
+                    <img src="/Images/xyz.png" alt="Shop Banner"> 
+                    <img src="/Images/xyz.png" alt="Shop Banner"> 
+                    <img src="/Images/xyz.png" alt="Shop Banner"> 
+                    <img src="/Images/xyz.png" alt="Shop Banner"> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .scrolling-img {
+            position: relative;
+            overflow: hidden;
+            width: 100%; /* Full-width container */
+        }
+    
+        .scrolling-img-wrapper {
+            display: flex;
+            flex-direction: column;
+            animation: scrollUp 60s linear infinite; 
+        }
+    
+        .scrolling-img img {
+            width: 100%; /* Ensure images span the container width */
+            height: auto; /* Maintain aspect ratio */
+        }
+    
+        /* Smoky effect on the top border of the scrolling image with gradual fade */
+        .scrolling-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px; /* Control the height of the smoky effect */
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)); /* Fading from white to transparent */
+            z-index: 2; /* Ensure it is above the image */
+        }
+    
+        @keyframes scrollUp {
+            0% {
+                transform: translateY(0); /* Start position */
+            }
+            100% {
+                transform: translateY(-100%); /* Move up completely */
+            }
+        }
+
+        /* Media query for mobile screens */
+        @media (max-width: 767px) {
+            #dynamicText {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const texts = [
+                "Discover Timeless Style at Thrift Girls",
+                "Elevate Your Wardrobe with Thrift Girls",
+                "Thrift Girls Where Every Dress Tells a Story."
+            ];
+
+            const textMobile = [
+                "Explore",
+                "Our Thrift Products",
+                "Purchase and feel"
+            ];
+        
+            let index = 0;
+            let charIndex = 0;
+            const dynamicTextElement = document.getElementById("dynamicText");
+            let isDeleting = false;
+        
+            // Check if we are on mobile device
+            const isMobile = window.innerWidth <= 767;
+            const currentTextArray = isMobile ? textMobile : texts;
+
+            function typeWriter() {
+                const currentText = currentTextArray[index];
+                if (isDeleting) {
+                    // Delete the text
+                    dynamicTextElement.innerHTML = currentText.substring(0, charIndex);
+                    charIndex--;
+                } else {
+                    // Type the text
+                    dynamicTextElement.innerHTML = currentText.substring(0, charIndex);
+                    charIndex++;
+                }
+            
+                if (charIndex === currentText.length) {
+                    isDeleting = true;
+                    setTimeout(typeWriter, 2000);  // Wait before starting to delete
+                } else if (charIndex === 0 && isDeleting) {
+                    isDeleting = false;
+                    index = (index + 1) % currentTextArray.length; // Loop through the texts
+                    setTimeout(typeWriter, 500);  // Wait before typing next phrase
+                } else {
+                    setTimeout(typeWriter, isDeleting ? 90 : 100);  // Speed of deleting vs typing
+                }
+            }
+        
+            typeWriter();
+        });
+    </script>
+</section>
+
+
+
+
+<main class="main">
+  
+
+    <section class="featured-section text-white">
+        <div class="section-wrapper">
+            <!-- Left Section -->
+            <div class="section-left" 
+     style="background-color: #ECF2EF; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+    <!-- Image Icon -->
+    <img 
+      src="/Images/relove.png" 
+      alt="Icon" 
+      style="width: 280px; height: auto; margin-bottom: 20px;"
+    />
+
+    <!-- Paragraph -->
+    <p 
+    class="amatic-sc-bold"
+      style="
+        
+        font-size: 29px; 
+        color: #000000;"
+    >
+    Sell gently loved clothes.
+    </p>
+</div>
+            <!-- Center Section -->
+            <div class="section-center" style="background-color: #FFEFD0; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                <!-- Image Icon -->
+    <img 
+    src="/Images/retake.png" 
+    alt="Icon" 
+    style="width: 280px; height: auto; margin-bottom: 20px;"
+  />
+
+  <!-- Paragraph -->
+  <p 
+  class="amatic-sc-bold"
+    style="
+     
+      font-size: 29px; 
+      color: #000000;"
+  >
+  Shop affordable finds.
+  </p>
+            </div>
+            
+            <!-- Right Section -->
+            <div class="section-right" style="background-color: #F5F4F1; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                               <!-- Image Icon -->
+    <img 
+    src="/Images/rescue-2.png" 
+    alt="Icon" 
+    style="width: 280px; height: auto; margin-bottom: 20px;"
+  />
+
+  <!-- Paragraph -->
+  <p 
+  class="amatic-sc-bold"
+    style="
+     
+      font-size: 29px; 
+      color: #000000;"
+  >
+  Thrift sustainably.
+  </p>
+            </div>
+        </div>
+    </section>
+
+
+    <style>
+        /* General Section Styling */
+        .featured-section {
+             /* Section padding */
+             /* Dark background for contrast */
+            color: #fff; /* White text color */
+        }
+        
+        .section-wrapper {
+            display: flex; /* Flexbox for equal-width columns */
+            align-items: flex-start; /* Align content at the top */
+            flex-wrap: wrap; /* Make it responsive for smaller screens */
+            height: 520px;
+        }
+        
+        .section-left, .section-center, .section-right {
+            flex: 1; /* Each section takes up equal width */
+            max-width: 33%; /* Limit width to 33% for desktop screens */
+            text-align: center; /* Center-align text */
+        }
+        
+        .section-left p, .section-center p, .section-right p {
+            margin: 10px 0; /* Spacing between paragraphs */
+        }
+        
+        /* Responsive Styling for Smaller Screens */
+        @media (max-width: 768px) {
+    .section-left, .section-center, .section-right {
+        flex: 1 1 33.33%; /* Each section takes 33.33% width */
+        max-width: 33.33%; /* Prevent sections from exceeding 33.33% width */
+    }
+
+    .section-wrapper {
+        justify-content: space-between; /* Ensure equal spacing between sections */
+    }
+}
+        </style>
+        
+
+
+
+        <section style="width: 100%; height: 50px; background-color: #4e7f5e71; overflow: hidden; position: relative;">
+            <!-- Moving Text Wrapper -->
+            <div style="position: absolute; white-space: nowrap; animation: moveText 15s linear infinite;">
+                <span class="amatic-sc-bold" style="font-size: 2rem; color: white; margin-right: 50px;">Explore Amazing Deals</span>
+                <span class="amatic-sc-bold" style="font-size: 2rem; color: white; margin-right: 50px;">Shop Quality Thrift Products</span>
+                <span class="amatic-sc-bold" style="font-size: 2rem; color: white; margin-right: 50px;">Unbeatable Prices</span>
+                <span class="amatic-sc-bold" style="font-size: 2rem; color: white; margin-right: 50px;">Thrift Girls - Your Style Destination</span>
+               
+            </div>
+        </section>
+        
+        <style>
+            @keyframes moveText {
+                0% {
+                    transform: translateX(-100%);
+                }
+                100% {
+                    transform: translateX(100%);
+                }
+            }
+        </style>
+
+
+<section style="width: 100%; height: 250px; background-color: #ffffff; display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden;">
+    <!-- Left Arrow -->
+    <button onclick="scrollCarousel(-1)" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background-color: #4e7f5e; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; justify-content: center; align-items: center; z-index: 10;">
+        &#8249;
+    </button>
+
+    <!-- Carousel Container -->
+    <div id="carousel" style="width: 90%; max-width: 1200px; display: flex; gap: 20px; overflow-x: auto; scroll-behavior: smooth; white-space: nowrap;">
+        <!-- Product Card 1 -->
+        <div style="flex: 0 0 250px; background-color: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 20px; border-radius: 10px; display: inline-block; text-align: center;">
+            <img src="/Images/1.jpg" 
+                 alt="Product Image" 
+                 style="width: 150px; height: 150px; object-fit: cover; border-radius: 10px;">
+        </div>
+        
+
+        <!-- Product Card 2 -->
+        <div style="flex: 0 0 250px; background-color: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 20px; border-radius: 10px; display: inline-block; text-align: center;">
+            <img src="/Images/2.jpeg" 
+                 alt="Product Image" 
+                 style="width: 150px; height: 150px; object-fit: cover; border-radius: 10px;">
+        </div>
+
+        <!-- Add more products -->
+        <div style="flex: 0 0 250px; background-color: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 20px; border-radius: 10px; display: inline-block; text-align: center;">
+            <img src="/Images/3.jpeg" 
+                 alt="Product Image" 
+                 style="width: 150px; height: 150px; object-fit: cover; border-radius: 10px;">
+        </div>
+        <div style="flex: 0 0 250px; background-color: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 20px; border-radius: 10px; display: inline-block; text-align: center;">
+            <img src="/Images/4.jpeg" 
+                 alt="Product Image" 
+                 style="width: 150px; height: 150px; object-fit: cover; border-radius: 10px;">
+        </div>
+        <div style="flex: 0 0 250px; background-color: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 20px; border-radius: 10px; display: inline-block; text-align: center;">
+            <img src="/Images/5.jpeg" 
+                 alt="Product Image" 
+                 style="width: 150px; height: 150px; object-fit: cover; border-radius: 10px;">
+        </div>
+        <div style="flex: 0 0 250px; background-color: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 20px; border-radius: 10px; display: inline-block; text-align: center;">
+            <img src="/Images/6.avif" 
+                 alt="Product Image" 
+                 style="width: 150px; height: 150px; object-fit: cover; border-radius: 10px;">
+        </div>
+        <div style="flex: 0 0 250px; background-color: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 20px; border-radius: 10px; display: inline-block; text-align: center;">
+            <img src="/Images/7.avif" 
+                 alt="Product Image" 
+                 style="width: 150px; height: 150px; object-fit: cover; border-radius: 10px;">
+        </div>
+    </div>
+
+    <!-- Right Arrow -->
+    <button onclick="scrollCarousel(1)" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background-color: #4e7f5e; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; justify-content: center; align-items: center; z-index: 10;">
+        &#8250;
+    </button>
+</section>
+
+<script>
+    const scrollCarousel = (direction) => {
+        const carousel = document.getElementById('carousel');
+        const scrollAmount = 300; // Adjust as per your requirement
+        carousel.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    };
+</script>
+
+
+        
+    
+
+
+        <section class="product-tabs section-padding position-relative wow fadeIn animated">
+            <div class="bg-square"></div>
+            <div class="container">
+                <div class="tab-header">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" style="background-color: #4e7f5e;" id="nav-tab-one">
+                                <p class="amatic-sc-bold" style="color: white; font-size: 2rem;">Latest Products</p>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <!--End nav-tabs-->
+                <div class="tab-content wow fadeIn animated" id="myTabContent">
+                    <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
+                        <div class="row g-3 mt-4">
+                            <% products.forEach(product => { %>
+                            <div class="col-lg-3 col-md-4 col-6">
+                                <div class="card position-relative">
+                                    <!-- Offer Badge -->
+                                    <% if (product.offerPercentage) { %>
+                                    <div class="badge gruppo-regular text-white position-absolute top-0 start-0 m-2 p-2 rounded" style="background-color: #4e7f5ec6; font-size: 17px; font-weight: bold;">
+                                        <%= product.offerPercentage %>% OFF
+                                    </div>
+                                    <% } %>
+                                    <!-- Product Image -->
+                                    <div class="card-img-top">
+                                        <a href="/productdetails/<%= product._id %>">
+                                            <img 
+                                                src="<%= product.coverimage %>" 
+                                                class="img-fluid rounded" 
+                                                alt="<%= product.name %>" 
+                                                style="object-fit: cover; aspect-ratio: 3/4;"
+                                            >
+                                        </a>
+                                    </div>
+                                    <!-- Product Details -->
+                                    <div class="card-body text-center p-2">
+                                        <h6 class="card-title amatic-sc-bold" style="font-size: 1.7rem;"><%= product.name %></h6>
+                                        <div class="product-price d-flex justify-content-center align-items-center gap-2">
+                                            <span class="amatic-sc-bold fw-bold" style="font-size: 1.5rem; color: #4e7f5e; font-weight: bold;" >₹ <%= product.offerPrice %></span>
+                                            <span class="text-muted text-decoration-line-through gruppo-regular" style="font-size: 1.3rem;">₹<%= product.price %></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                        </div>
+                        <!-- SEE MORE PRODUCTS Button -->
+                        <div class="text-center mt-4">
+                            <a href="/homeProduct" class="btn amatic-sc-bold" style="color: white; background-color: #4e7f5e; font-size: 1.5rem;">SEE MORE PRODUCTS</a>
+                        </div>
+                    </div>
+                    <!--End tab one-->
+                </div>
+                <!--End tab-content-->
+            </div>
+        </section>
+
+        <!-- Additional Styling -->
+        <style>
+            @media (max-width: 768px) {
+                .card {
+                    height: auto;
+                }
+            }
+        </style>       
+    </main>
+    <footer class="main" style="background-color: #4e7f5ec4;">
+        <section class="section-padding footer-mid">
+            <div class="container pt-15 pb-20">
+                <div class="row justify-content-center text-center text-md-start">
+                    <!-- About Section -->
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="widget-about font-md">
+                            <div class="logo logo-width-1">
+                                <h3><p class="gruppo-regular" style="color: black; font-size: 2rem;">LO<span style="color: #ffffff;"> VIZ STORE</span></p></h3>
+                            </div>
+                            <h5 class="mt-20 mb-10 text-white gruppo-regular">Contact</h5>
+                            <p class="text-white">
+                                <strong class="text-dark gruppo-regular" style="font-size: 1.5rem;">Phone:</strong> 
+                                <p class="text-white gruppo-regular" style="font-size: 1.5rem;">+91 8848530816</p>
+                            </p>
+                            <p class="text-white">
+                                <strong class="text-dark gruppo-regular" style="font-size: 1.5rem;">Email:</strong> 
+                                <a href="mailto:loviz@gmail.com" class="text-white gruppo-regular" style="font-size: 1.5rem;">loviz@gmail.com</a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- About Links -->
+                    <div class="col-lg-2 col-md-3 col-sm-6 mb-4">
+                        <h5 class="widget-title text-white gruppo-regular" style="font-size: 1.5rem;">About</h5>
+                        <ul class="footer-list list-unstyled">
+                            <li><a href="/contact-us" class="text-white amatic-sc-bold" style="font-size: 1.3rem;">Contact Us</a></li>
+                            <li><a href="/terms&conditions" class="text-white amatic-sc-bold" style="font-size: 1.3rem;">Terms and Conditions</a></li>
+                            <li><a href="/homeProduct" class="text-white amatic-sc-bold" style="font-size: 1.3rem;">Shop</a></li>
+                            <li><a href="/refundPolicy" class="text-white amatic-sc-bold" style="font-size: 1.3rem;">Refund Policy</a></li>
+                        </ul>
+                    </div>
+                    <!-- Account Links -->
+                    <div class="col-lg-2 col-md-3 col-sm-6 mb-">
+                        <h5 class="widget-title text-white gruppo-regular" style="font-size: 1.5rem;">My Account</h5>
+                        <ul class="footer-list list-unstyled">
+                            <li><a href="/login" class="text-white amatic-sc-bold" style="font-size: 1.3rem;">Sign In</a></li>
+                            <li><a href="/cart" class="text-white amatic-sc-bold" style="font-size: 1.3rem;">My Cart</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+      </footer>
+</div>
+
+    <!-- Vendor JS-->
+    <script src="/user/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="/user/assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="/user/assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="/user/assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="/user/assets/js/plugins/slick.js"></script>
+    <script src="/user/assets/js/plugins/jquery.syotimer.min.js"></script>
+    <script src="/user/assets/js/plugins/wow.js"></script>
+    <script src="/user/assets/js/plugins/jquery-ui.js"></script>
+    <script src="/user/assets/js/plugins/perfect-scrollbar.js"></script>
+    <script src="/user/assets/js/plugins/magnific-popup.js"></script>
+    <script src="/user/assets/js/plugins/select2.min.js"></script>
+    <script src="/user/assets/js/plugins/waypoints.js"></script>
+    <script src="/user/assets/js/plugins/counterup.js"></script>
+    <script src="/user/assets/js/plugins/jquery.countdown.min.js"></script>
+    <script src="/user/assets/js/plugins/images-loaded.js"></script>
+    <script src="/user/assets/js/plugins/isotope.js"></script>
+    <script src="/user/assets/js/plugins/scrollup.js"></script>
+    <script src="/user/assets/js/plugins/jquery.vticker-min.js"></script>
+    <script src="/user/assets/js/plugins/jquery.theia.sticky.js"></script>
+    <script src="/user/assets/js/plugins/jquery.elevatezoom.js"></script>
+    <!-- Template  JS -->
+    <script src=".//user/assets/js/main.js?v=3.4"></script>
+    <script src=".//user/assets/js/shop.js?v=3.4"></script>
+
+   
+</body>
+
+</html>

@@ -1,0 +1,350 @@
+<%- include('adminHeader') %>
+
+
+        <section class="content-main">
+            <div class="content-header">
+                <div>
+                    <h2 class="content-title card-title">Dashboard </h2>
+                    <p>Whole data about your business here</p>
+                </div>
+                
+            </div>
+            <div class="row">
+                
+                
+                <div class="col-lg-3">
+                    <div class="card card-body mb-4">
+                        <article class="icontext">
+                            <span class="icon icon-sm rounded-circle bg-warning-light"><i class="text-warning material-icons md-qr_code"></i></span>
+                            <div class="text">
+                                <h6 class="mb-1 card-title">Products</h6> <span><%= totalProducts %></span>
+                                <span class="text-sm">
+                                    In <%= totalCategories %> Categories
+                                </span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-xl-8 col-lg-12">
+                    <div class="card mb-4">
+                        <article class="card-body">
+                            <h5 class="card-title">Sale statistics</h5>
+                            <input type="text" value="<%= monthlySalesArray %>" hidden id="monthlySalesArray">
+                            <input type="text" value="<%= productsPerMonth %>" hidden id="productsPerMonth">
+
+                            <canvas id="myChart" height="120px"></canvas>
+                            <!-- <button onclick="updateChart()">Update Chart</button> -->
+                        </article>
+                    </div>
+
+                   
+                    
+                    
+
+                   
+                      
+                    
+
+                    <div class="row">
+                        
+                        <div class="col-lg-5">
+                            <div class="card mb-4">
+                                <article class="card-body">
+                                    <h5 class="card-title">New Members</h5>
+                                    <!-- Assuming usersData contains the latest 3 users -->
+                                        <% if (users && users.length > 0) { %>
+                                            <% users.slice(0, 3).forEach(user => { %>
+                                                <div class="new-member-list">
+                                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                                        <div class="d-flex align-items-center">
+                                                            <!-- Assuming each user has a profile picture -->
+                                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUpa_KcLqUI_W3VzG4aQc3MyP5pgS_aUy7UA&usqp=CAU" alt="" class="avatar">
+                                                            <div>
+                                                                <h6><%= user.name %></h6>
+                                                                <p class="text-muted font-xs"><%= user.location %></p>
+                                                            </div>
+                                                        </div>
+                                                        <!-- You can add additional information here if needed -->
+                                                    </div>
+                                                </div>
+                                            <% }); %>
+                                        <% } else { %>
+                                            <p>No users found</p>
+                                        <% } %>
+
+                                </article>
+                            </div>
+                        </div>
+                     
+                    </div>
+                </div>
+               
+                
+                
+                
+
+                    <!-- /////////////////// -->
+                    
+                </div>
+
+                
+                
+            </div>
+            
+        </section> <!-- content-main end// -->
+        <script src="assets/js/vendors/jquery-3.6.0.min.js"></script>
+        <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/vendors/select2.min.js"></script>
+        <script src="assets/js/vendors/perfect-scrollbar.js"></script>
+        <script src="assets/js/vendors/jquery.fullscreen.min.js"></script>
+
+        <!-- Add this to the head of your HTML document -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+
+<script>
+
+
+(function ($
+) {
+    "use strict";
+    // Assuming you have a function called processData
+// const processedData = processData(monthlySalesArray);
+let monthlySalesArray = document.getElementById("monthlySalesArray").value;
+
+monthlySalesArray = monthlySalesArray.trim(); // Remove leading and trailing whitespace
+monthlySalesArray = monthlySalesArray.split(',')
+monthlySalesArray = monthlySalesArray.map((item)=> Number(item))
+monthlySalesArray = Array(monthlySalesArray);
+monthlySalesArray = monthlySalesArray[0]
+
+
+let productsPerMonth = document.getElementById("productsPerMonth").value;
+
+productsPerMonth = productsPerMonth.trim(); // Remove leading and trailing whitespace
+productsPerMonth = productsPerMonth.split(',')
+productsPerMonth = productsPerMonth.map((item)=> Number(item))
+productsPerMonth = Array(productsPerMonth);
+productsPerMonth = productsPerMonth[0]
+console.log(productsPerMonth)
+
+ // Output: object (assuming the parsed result is an array)
+
+    if ($('#myChart').length) {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+            // The data for our dataset
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                        label: 'Sales',
+                        tension: 0.3,
+                        fill: true,
+                        backgroundColor: 'rgba(44, 120, 220, 0.2)',
+                        borderColor: 'rgba(44, 120, 220)',
+                        data: monthlySalesArray
+                    },
+                    {
+                        label: 'Products',
+                        tension: 0.3,
+                        fill: true,
+                        backgroundColor: 'rgba(380, 200, 230, 0.2)',
+                        borderColor: 'rgb(380, 200, 230)',
+                        data: productsPerMonth
+                    }
+
+                ]
+            },
+            options: {
+                plugins: {
+                legend: {
+                    labels: {
+                    usePointStyle: true,
+                    },
+                }
+                }
+            }
+        });
+    } //End if
+
+    
+    
+})(jQuery);
+
+
+
+</script>
+
+
+       
+
+
+
+<!-- Inside your EJS file -->
+<script>
+   const categorySalesData = {
+  labels: [<%- categorySales.map(category => `'${category._id}'`).join(', ') %>],
+  datasets: [{
+    data: [<%- categorySales.map(category => category.totalSales).join(', ') %>],
+    backgroundColor: [
+      'rgba(255, 99, 132, 0.5)',
+      'rgba(54, 162, 235, 0.5)',
+      'rgba(255, 206, 86, 0.5)',
+      'rgba(75, 192, 192, 0.5)',
+      // Add more colors as needed
+    ],
+    borderColor: [
+      'rgba(255, 99, 132, 1)',
+      'rgba(54, 162, 235, 1)',
+      'rgba(255, 206, 86, 1)',
+      'rgba(75, 192, 192, 1)',
+      // Add more colors as needed
+    ],
+    borderWidth: 1,
+  }],
+};
+
+    const categorySalesOptions = {
+        scale: {
+            ticks: {
+                beginAtZero: true,
+            },
+        },
+    };
+
+    const ctxCategorySales = document.getElementById('categorySalesChart').getContext('2d');
+
+    const categorySalesChart = new Chart(ctxCategorySales, {
+        type: 'polarArea',
+        data: categorySalesData,
+        options: categorySalesOptions,
+    });
+</script>
+
+
+
+<script>
+    const orderStatusData = {
+        labels: [<%- orderStatuses.map(status => `'${status._id}'`).join(', ') %>],
+        datasets: [{
+            data: [<%- orderStatuses.map(status => status.count).join(', ') %>],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.5)',
+                'rgba(54, 162, 235, 0.5)',
+                'rgba(255, 206, 86, 0.5)',
+                'rgba(75, 192, 192, 0.5)',
+                // Add more colors as needed
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                // Add more colors as needed
+            ],
+            borderWidth: 1,
+        }],
+    };
+
+    const orderStatusOptions = {
+        scale: {
+            ticks: {
+                beginAtZero: true,
+            },
+        },
+    };
+
+    const ctxOrderStatus = document.getElementById('orderStatusChart').getContext('2d');
+
+    const orderStatusChart = new Chart(ctxOrderStatus, {
+        type: 'polarArea',
+        data: orderStatusData,
+        options: orderStatusOptions,
+    });
+</script>
+
+<script>
+    const topSellingProductsData = {
+        labels: [<%- topSellingProducts.map(product => `'${product.productInfo.name}'`).join(', ') %>],
+        datasets: [{
+            data: [<%- topSellingProducts.map(product => product.totalQuantity).join(', ') %>],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.5)',
+                'rgba(54, 162, 235, 0.5)',
+                'rgba(255, 206, 86, 0.5)',
+                'rgba(75, 192, 192, 0.5)',
+                'rgba(153, 102, 255, 0.5)',
+                // Add more colors as needed
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                // Add more colors as needed
+            ],
+            borderWidth: 1,
+        }],
+    };
+
+    const topSellingProductsOptions = {
+        scale: {
+            ticks: {
+                beginAtZero: true,
+            },
+        },
+    };
+
+    const ctxTopSellingProducts = document.getElementById('topSellingProductsChart').getContext('2d');
+
+    const topSellingProductsChart = new Chart(ctxTopSellingProducts, {
+        type: 'polarArea',
+        data: topSellingProductsData,
+        options: topSellingProductsOptions,
+    });
+</script>
+
+
+<script>
+    const topRevenueData = {
+        labels: <%- topRevenueLabels %>,
+        datasets: [{
+            label: 'Top Revenue Months',
+            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+            data: <%- topRevenueValues %>,
+        }],
+    };
+
+    const topRevenueOptions = {
+        scales: {
+            y: {
+                beginAtZero: true,
+            },
+        },
+    };
+
+    const ctxTopRevenue = document.getElementById('topRevenueChart').getContext('2d');
+
+    const topRevenueChart = new Chart(ctxTopRevenue, {
+        type: 'bar',
+        data: topRevenueData,
+        options: topRevenueOptions,
+    });
+</script>
+
+        <%- include('adminFooter') %>
+
+
+
+
+
